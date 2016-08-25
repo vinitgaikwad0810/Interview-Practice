@@ -30,6 +30,6 @@ public class OnePointTwo {
 
     public static void main(String[] args) {
 
-        GeneralUtils.println(reverse("2344567"));
+        GeneralUtils.println(reverse("vinitAnilGaikwad"));
     }
 }
