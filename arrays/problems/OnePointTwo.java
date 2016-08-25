@@ -7,6 +7,11 @@ import utils.GeneralUtils;
  */
 public class OnePointTwo {
 
+    /**
+     * Reversing a string
+     * @param givenString
+     * @return
+     */
     public static String reverse(String givenString) {
 
         char temp;
