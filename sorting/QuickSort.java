@@ -24,7 +24,7 @@ public class QuickSort implements Sorting<Integer> {
 		i = low;
 		j = high;
 
-		while (i < j) {
+		while (true) {
 			while (i < array.length && array[i] <= array[pivot])
 				i++;
 			while (j > 0 && array[j] > array[pivot])
