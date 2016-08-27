@@ -63,19 +63,46 @@ public class BinaryTree {
     }
 
 
-    public static void printInOrder(BinaryTreeNode root) {
+    public static void printInOrderRecursive(BinaryTreeNode root) {
+
 
         if (root != null) {
-            printInOrder(root.getLeft());
-            GeneralUtils.println("--" + root.getData() + "--");
-            printInOrder(root.getRight());
+            printInOrderRecursive(root.getLeft());
+            GeneralUtils.print("--" + root.getData() + "--");
+
+            printInOrderRecursive(root.getRight());
+        }
+    }
+
+    public static void printPreOrderRecursive(BinaryTreeNode root) {
+
+
+        if (root != null) {
+            GeneralUtils.print("--" + root.getData() + "--");
+            printPreOrderRecursive(root.getLeft());
+            printPreOrderRecursive(root.getRight());
+        }
+    }
+
+    public static void printPostOrderRecursive(BinaryTreeNode root) {
+
+
+        if (root != null) {
+            printPostOrderRecursive(root.getLeft());
+            printPostOrderRecursive(root.getRight());
+            GeneralUtils.print("--" + root.getData() + "--");
         }
     }
 
     public static void main(String[] args) {
 
         BinaryTree binaryTree = BinaryTree.build();
-        binaryTree.printInOrder(binaryTree.getRoot());
+        GeneralUtils.println("Recursive InOrder Traversal");
+        binaryTree.printInOrderRecursive(binaryTree.getRoot());
+        GeneralUtils.println("Recursive PreOrder Traversal");
+        binaryTree.printPreOrderRecursive(binaryTree.getRoot());
+        GeneralUtils.println("Recursive PostOrder Traversal");
+        binaryTree.printPostOrderRecursive(binaryTree.getRoot());
 
     }
 }
