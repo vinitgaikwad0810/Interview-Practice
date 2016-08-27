@@ -9,7 +9,7 @@ public class BinaryTreeNode {
     private BinaryTreeNode left;
     private BinaryTreeNode right;
 
-    public int getData() {
+    public char getData() {
         return data;
     }
 
