@@ -2,6 +2,8 @@ package tree.binary;
 
 import utils.GeneralUtils;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -144,9 +146,93 @@ public class BinaryTree {
         }
     }
 
-
+    //TODO InComplete
     public static void printPostOrderNonRecursive(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> binaryTreeNodeStack = new Stack<>();
+        BinaryTreeNode currentNode = root, previousNode = root;
+        Boolean alreadyVisited = Boolean.FALSE;
+        binaryTreeNodeStack.push(root);
+        while (true) {
+            currentNode = binaryTreeNodeStack.peek();
+            if (currentNode != null) {
 
+
+                binaryTreeNodeStack.push(currentNode);
+                currentNode = currentNode.getLeft();
+
+            } else {
+                if (binaryTreeNodeStack.isEmpty()) {
+                    break;
+                } else {
+
+                    if (currentNode.getRight() != null && currentNode.getRight() != previousNode) {
+
+                        binaryTreeNodeStack.push(currentNode.getRight());
+
+                    } else {
+                        previousNode = binaryTreeNodeStack.pop();
+                        GeneralUtils.print("--" + currentNode.getData() + "--");
+
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+    public static void printLevelOrderTraversal(BinaryTreeNode root) {
+        Queue<BinaryTreeNode> binaryTreeNodeQueue = new LinkedList<>();
+
+        binaryTreeNodeQueue.add(root);
+
+        while (!binaryTreeNodeQueue.isEmpty()) {
+
+            BinaryTreeNode currentNode = binaryTreeNodeQueue.remove();
+            GeneralUtils.print("--" + currentNode.getData() + "--");
+
+            if (currentNode.getLeft() != null) {
+
+                binaryTreeNodeQueue.add(currentNode.getLeft());
+            }
+            if (currentNode.getRight() != null) {
+                binaryTreeNodeQueue.add(currentNode.getRight());
+            }
+        }
+    }
+
+    public static Integer height(BinaryTreeNode root) {
+
+        if (root != null) {
+            Integer heightOfLeftSubtree = height(root.getLeft());
+            Integer heightOfRightSubtree = height(root.getRight());
+
+            if (heightOfLeftSubtree <= heightOfRightSubtree) {
+                return heightOfRightSubtree + 1;
+            } else {
+                return heightOfLeftSubtree + 1;
+            }
+        } else {
+            return 0;
+        }
+
+    }
+
+    public static Integer heightNonRecursive(BinaryTreeNode root) {
+
+        Queue<BinaryTreeNode> binaryTreeNodeQueue = new LinkedList<>();
+
+        binaryTreeNodeQueue.offer(root);
+        binaryTreeNodeQueue.offer(null);
+
+//        while (!binaryTreeNodeQueue.isEmpty()) {
+//
+//            BinaryTreeNode current = binaryTreeNodeQueue.poll();
+//
+//            if(current.getRight())
+//        }
+        return null;
     }
 
     public static void main(String[] args) {
@@ -164,6 +250,14 @@ public class BinaryTree {
 
         GeneralUtils.println("\nNon Recursive PreOrder Traversal");
         binaryTree.printPreOrderNonRecursive(binaryTree.getRoot());
+
+//        GeneralUtils.println("\nNon Recursive PostOrder Traversal");
+//        binaryTree.printPostOrderNonRecursive(binaryTree.getRoot());
+
+        GeneralUtils.println("\nNon Recursive Level Order Traversal");
+        binaryTree.printLevelOrderTraversal(binaryTree.getRoot());
+
+        GeneralUtils.println("\nHeight of the tree =" + binaryTree.height(binaryTree.getRoot()));
 
     }
 }
